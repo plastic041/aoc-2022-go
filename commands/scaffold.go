@@ -31,10 +31,22 @@ func Scaffold(problemNumber string) {
 import (
 	"fmt"
 	"os"
+	"path/filepath"
+	"runtime"
+	"sort"
+	"strconv"
+	"strings"
 )
 
 func main() {
-	dat, err := os.ReadFile("../../inputs/%s.txt")
+	_, filename, _, ok := runtime.Caller(0)
+	if !ok {
+		panic("No caller information")
+	}
+
+	dirname := filepath.Dir(filename)
+
+	dat, err := os.ReadFile(filepath.Join(dirname, "../../inputs/%s.txt"))
 	if err != nil {
 		panic(err)
 	}
@@ -123,6 +135,36 @@ func TestPartTwo(t *testing.T) {
 	err = f.Close()
 	if err != nil {
 		fmt.Printf("Error closing file %s: %s", testFile, err)
+		return
+	}
+
+	// Create the example file
+	exampleFile := filepath.Join("examples", problemNumber+".txt")
+	f, err = os.Create(exampleFile)
+	if err != nil {
+		fmt.Printf("Error creating file %s: %s", exampleFile, err)
+		return
+	}
+
+	// Close the file
+	err = f.Close()
+	if err != nil {
+		fmt.Printf("Error closing file %s: %s", exampleFile, err)
+		return
+	}
+
+	// Create the input file
+	inputFile := filepath.Join("inputs", problemNumber+".txt")
+	f, err = os.Create(inputFile)
+	if err != nil {
+		fmt.Printf("Error creating file %s: %s", inputFile, err)
+		return
+	}
+
+	// Close the file
+	err = f.Close()
+	if err != nil {
+		fmt.Printf("Error closing file %s: %s", inputFile, err)
 		return
 	}
 
