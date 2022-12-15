@@ -18,12 +18,12 @@ func TestPartOne(t *testing.T) {
 	dat, err := os.ReadFile("../../examples/01.txt")
 	check(err)
 
-	assert.Equal(t, 0, solve01.PartOne(string(dat)))
+	assert.Equal(t, 24000, solve01.PartOne(string(dat)))
 }
 
 func TestPartTwo(t *testing.T) {
 	dat, err := os.ReadFile("../../examples/01.txt")
 	check(err)
 
-	assert.Equal(t, 0, solve01.PartTwo(string(dat)))
+	assert.Equal(t, 45000, solve01.PartTwo(string(dat)))
 }
