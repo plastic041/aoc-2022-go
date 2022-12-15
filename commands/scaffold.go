@@ -28,6 +28,23 @@ func Scaffold(problemNumber string) {
 	// Write the file contents
 	_, err = f.WriteString(fmt.Sprintf(`package solve%s
 
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+	dat, err := os.ReadFile("../../inputs/%s.txt")
+	if err != nil {
+		panic(err)
+	}
+
+	input := string(dat)
+
+	fmt.Println(PartOne(input))
+	fmt.Println(PartTwo(input))
+}
+
 func PartOne(input string) int {
 	return 0
 }
@@ -35,7 +52,7 @@ func PartOne(input string) int {
 func PartTwo(input string) int {
 	return 0
 }
-`, problemNumber))
+`, problemNumber, problemNumber))
 
 	if err != nil {
 		fmt.Printf("Error writing to file %s: %s", solveFile, err)
